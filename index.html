@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play | Scramble Words</title>
+    <link rel="icon" href="https://img.icons8.com/?size=100&id=EUsaRzNM40jn&format=png&color=000000" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <script src="https://kit.fontawesome.com/7e99a9e738.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Home main container start here -->
+    <div class="HomeMainContainer">
+        <div class="HomeWordsContent">
+                <div class="HomeScrambleContent">
+                    <h3>Scramble</h3>
+                </div>
+                <div class="HomeScrambleWordsContent">
+                    <div class="Homeword word1">W</div>
+                    <div class="Homeword word2">O</div>
+                    <div class="Homeword word3">R</div>
+                    <div class="Homeword word4">D</div>
+                    <div class="Homeword word5">S</div>
+                </div>
+        </div>
+        <div class="PlayButton">
+            <button type="button" id="PlayButton">Play</button>
+        </div>
+    </div>
+    <!-- Home main container ends here -->
+
+    <!-- Container box starts here -->
+        <div class="Container">
+            <!-- Inner first container starts here -->
+            <div class="InnerContainer">
+                <div class="ScoreCounter">
+                    <p>Score : <span id="score">0</span></p>
+                </div>
+                <div class="WordsContent">
+                    <div class="ScrambleContent">
+                        <h3>Scramble</h3>
+                    </div>
+                    <div class="ScrambleWordsContent">
+                        <div class="word word1">W</div>
+                        <div class="word word2">O</div>
+                        <div class="word word3">R</div>
+                        <div class="word word4">D</div>
+                        <div class="word word5">S</div>
+                    </div>
+                </div>
+                <div class="HintButton">
+                    <i class="fa-regular fa-lightbulb"></i>
+                </div>
+                <!-- Level selector starts here -->
+                <div class="LevelSelector">
+                    <select name="Level" id="LevelSelector">
+                        <option value="easy" selected>Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                        <option value="veryHard">Very Hard</option>
+                    </select>
+                </div>
+                <!-- Level selector ends here -->
+            </div>
+            <!-- Inner first container ends here -->
+            <!-- Inner second container starts here -->
+                <div class="InnerContainer2">
+                    <div class="DiplayedWordsContent">
+                        
+                    </div>
+                    <div class="AlertMessage">
+                        <p class="animate__animated">Correct Guess</p>
+                    </div>
+                    <div class="GuideLineword">
+                        <h4>Guess the above displayed word !</h4>
+                    </div>
+                </div>
+            <!-- Inner second container ends here -->
+            <!-- Inner third container starts here -->
+                <div class="InnerContainer3">
+                    <div class="WordInputContainer">
+                        <input type="text" id="WordInput" placeholder="Enter the given word in correct order here...">
+                    </div>
+                    <div class="ButtonsContainer">
+                        <div class="EnterButton">
+                            <h2>Enter</h2>
+                        </div>
+                        <div class="NextButton">
+                            <h2>Next</h2>
+                        </div>
+                    </div>
+                    <div class="ButtonsContainer">
+                        <div class="ResetButton">
+                            <h2>Reset</h2>
+                        </div>
+                        <div class="ExitButton">
+                            <h2>Exit</h2>
+                        </div>
+                    </div>
+                </div>
+            <!-- Inner third container ends here -->
+            
+        </div>
+    <!-- Container box ends here -->
+
+    <script src="main.js"></script>
+</body>
+</html>
