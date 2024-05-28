@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play | Scramble Words</title>
+    <link rel="icon" href="https://img.icons8.com/?size=100&id=EUsaRzNM40jn&format=png&color=000000" type="image/x-icon">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <script src="https://kit.fontawesome.com/7e99a9e738.js" crossorigin="anonymous"></script>
+    <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap'); */
+
+/* Root css varialbes for colors */
+:root{
+    --text-color-white: rgb(221,221,221);
+    --header-container: rgb(14,17,18);
+    --main-container: rgb(14,17,18);
+    --input-container: rgb(15,15,15);
+    --button-container: rgb(19,18,21);
+    --correct-word-color: rgb(72,131,109);
+    --incorrect-word-color: rgb(121,31,49);
+    --scramble-letter-color: rgb(8,91,33);
+    --body-bg-color: rgb(35,39,42);
+    --lightbulb-color: rgb(253,243,68);
+    --reset-text-color: steelblue;
+}
+
+body{
+    caret-color: transparent;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: var(--body-bg-color);
+    color: var(--text-color-white);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* Container box starts here */
+.Container{
+    border: 2px solid var(--header-container);
+    border-radius: 0.6rem;
+    box-sizing: border-box;
+    width: 80%;
+    height: max-content;
+    margin: 3.5rem auto;
+    padding: 0rem 0rem;
+    display: none;
+}
+
+/* Container box ends here */
+
+/* Inner first container starts here */
+.InnerContainer{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0rem auto;
+    padding: 0.2rem 0.4rem;
+    height: 20%;
+    background-color: var(--header-container);
+    animation: InnerContainerSlideDown 1.2s ease-in-out forwards;
+}
+
+@keyframes InnerContainerSlideDown {
+    0%{
+        transform: translateY(-800px) scale(0.7);
+        -webkit-transform: translateY(-800px) scale(0.7);
+        opacity: 0.5;
+    }
+    80%{
+        transform: translateY(0px) scale(0.5);
+        -webkit-transform: translateY(0px) scale(0.5);
+        opacity: 0.7;
+    }
+    100%{
+        transform: translateY(0px) scale(1);
+        -webkit-transform: translateY(0px) scale(1);
+        opacity: 1;
+    }
+}
+
+.ScrambleWordsContent{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+    width: max-content;
+    padding: 0.4rem 0.4rem;
+    margin: 0.2rem 0.5rem;
+}
+
+.ScrambleContent{
+    padding: 0rem 0rem;
+}
+
+.ScrambleContent h3{
+    margin: 0;
+    padding: 0;
+    font-size: 1.6rem;
+    letter-spacing: 0.4rem;
+    text-transform: uppercase;
+}
+
+.WordsContent{
+    width: max-content;
+    text-align: center;
+    padding: 0rem 0.4rem;
+    height: 4.6rem;
+}
+
+.word{
+    border: 1px solid var(--text-color-white);
+    border-radius: 0.2rem;
+    padding: 0.1rem 0.1rem;
+    height: 1.2rem;
+    width: 1.2rem;
+    font-size: 1.2rem;
+    background-color: rgb(66, 185, 50);
+    color: var(--header-container);
+}
+
+.word1{
+    transform: rotate(-8deg);
+}
+
+.word2{
+    transform: rotate(10deg);
+}
+
+.word3{
+    transform: rotate(-8deg);
+}
+
+.word4{
+    transform: rotate(10deg);
+}
+
+.word5{
+    transform: rotate(-8deg);
+}
+
+.ScoreCounter p{
+    background-color: var(--body-bg-color);
+    border-radius: 0.2rem;
+    margin: 0;
+    padding: 0.2rem 0.2rem;
+    font-size: 1.2rem;
+}
+
+.fa-lightbulb{
+    cursor: pointer;
+    background-color: var(--body-bg-color);
+    border-radius: 0.2rem;
+    padding: 0.2rem 0.2rem;
+    font-size: 1.3rem;
+}
+
+.fa-lightbulb:hover{
+    color: var(--lightbulb-color);
+}
+
+/* Inner first container ends here */
+
+/* Level selector starts here */
+.LevelSelector{
+    position: absolute;
+    top: 40%;
+    left: 0.5%;
+    transform: translate(0.5%,40%);
+}
+
+#LevelSelector{
+    border: none;
+    background-color: var(--body-bg-color);
+    color: var(--text-color-white);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.3rem;
+}
+
+#LevelSelector option{
+    background-color: var(--header-container);
+}
+
+/* Level selector ends here */
+
+/* Inner second container starts here */
+.InnerContainer2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.2rem 0.2rem;
+    margin: 0.1rem 0rem;
+    height: 32vh;
+    animation: InnerContainer2FadeIn 6s ease-in-out forwards;
+}
+
+@keyframes InnerContainer2FadeIn {
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.DiplayedWordsContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;
+    box-sizing: border-box;
+    width : auto;
+    margin: 0.2rem auto;
+}
+
+.AlertMessage p{
+    margin: 0;
+    padding: 0;
+}
+
+.AlertCorrect{
+    color: yellowgreen;
+}
+
+.AlertIncorrect{
+    color: orangered;
+}
+
+.AlertMessage{
+    display: none;
+    box-sizing: border-box;
+    width: 76%;
+    margin: 0rem auto;
+    padding: 0.2rem 0.2rem;
+    text-align: center;
+    margin-bottom: 0.1rem;
+}
+
+.GuideLineword h4{
+    margin: 0;
+    padding: 0;
+}
+
+.GuideLineword{
+    box-sizing: border-box;
+    width: 76%;
+    margin: 0rem auto;
+    padding: 0.2rem 0.2rem;
+    height: max-content;
+    text-align: center;
+}
+
+.scrambleletter{
+    border-radius: 0.4rem;
+    padding: 0rem 0.2rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.6rem;
+    height: 2rem;
+    width: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    margin: 0.2rem 0.4rem;
+    text-transform: uppercase;
+    background-color: var(--header-container);
+}
+
+/* Inner second container ends here */
+
+/* Inner third container starts here */
+.InnerContainer3{
+    box-sizing: border-box;
+    padding: 0.2rem 0.2rem;
+    height: auto;
+}
+
+.WordInputContainer{
+    box-sizing: border-box;
+    border: 1px solid var(--text-color-white);
+    border-radius: 0.2rem;
+    width: 100%;
+    padding: 0.2rem 0.1rem;
+    animation: WordInputContainerSlideRight 2.2s ease-in-out forwards;
+}
+
+@keyframes WordInputContainerSlideRight {
+    0%{
+        transform: translateX(-1200px) scale(0.7);
+        -webkit-transform: translateX(-1200px) scale(0.7);
+    }
+    80%{
+        transform: translateX(0px) scale(0.5);
+        -webkit-transform: translateX(0px) scale(0.5);
+    }
+    100%{
+        transform: translateX(0px) scale(1);
+        -webkit-transform: translateX(0px) scale(1);
+    }
+}
+
+#WordInput{
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 2.4rem;
+    caret-color: var(--text-color-white);
+    color: green;
+    font-size: 1rem;
+    background-color: var(--input-container);
+}
+
+.ButtonsContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 0.3rem;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.1rem 0.1rem;
+    margin: 0.1rem 0rem;
+    animation: ButtonsContainerSlideUp 1.2s ease-in-out forwards;
+}
+
+@keyframes ButtonsContainerSlideUp {
+    0%{
+        transform: translateY(800px) scale(0.7);
+        -webkit-transform: translateY(800px) scale(0.7);
+        opacity: 0.5;
+    }
+    80%{
+        transform: translateY(0px) scale(0.5);
+        -webkit-transform: translateY(0px) scale(0.5);
+        opacity: 0.7;
+    }
+    100%{
+        transform: translateY(0px) scale(1);
+        -webkit-transform: translateY(0px) scale(1);
+        opacity: 1;
+    }
+}
+
+.ButtonsContainer{
+    font-size: 0.8rem;
+}
+
+.EnterButton h2{
+    margin: 0;
+    padding: 0;
+}
+
+.EnterButton h2:hover{
+    margin-top: 0.1rem;
+    transition: all 0.6s;
+    opacity: 0.8;
+}
+
+.EnterButton{
+    box-sizing: border-box;
+    border: 1px solid var(--text-color-white);
+    border-radius: 0.4rem;
+    width: 50%;
+    height: max-content;
+    text-align: center;
+    padding: 0.4rem 0rem;
+    margin: 0.1rem 0rem;
+    cursor: pointer;
+    background-color: var(--body-bg-color);
+}
+
+.EnterButton:hover{
+    background-color: var(--header-container);
+}
+
+.NextButton h2{
+    margin: 0;
+    padding: 0;
+}
+
+.NextButton h2:hover{
+    margin-top: 0.2rem;
+    transition: all 0.6s;
+    opacity: 0.8;
+}
+
+.NextButton{
+    box-sizing: border-box;
+    border: 1px solid var(--text-color-white);
+    border-radius: 0.4rem;
+    width: 50%;
+    height: max-content;
+    text-align: center;
+    padding: 0.4rem 0rem;
+    margin: 0.1rem 0rem;
+    cursor: pointer;
+    background-color: var(--body-bg-color);
+}
+
+.NextButton:hover{
+    background-color: var(--header-container);
+}
+
+.ResetButton h2{
+    margin: 0;
+    padding: 0;
+}
+
+.ResetButton h2:hover{
+    margin-top: 0.2rem;
+    transition: all 0.6s;
+    opacity: 0.8;
+    color: var(--reset-text-color);
+}
+
+.ResetButton{
+    box-sizing: border-box;
+    border: 1px solid var(--text-color-white);
+    border-radius: 0.4rem;
+    width: 50%;
+    height: max-content;
+    text-align: center;
+    padding: 0.4rem 0rem;
+    margin: 0.1rem 0rem;
+    cursor: pointer;
+    background-color: var(--body-bg-color);
+}
+
+.ResetButton:hover{
+    background-color: var(--header-container);
+}
+
+.ExitButton h2{
+    margin: 0;
+    padding: 0;
+}
+
+.ExitButton h2:hover{
+    margin-top: 0.2rem;
+    transition: all 0.6s;
+    opacity: 0.8;
+    color: var(--incorrect-word-color);
+}
+
+.ExitButton{
+    box-sizing: border-box;
+    border: 1px solid var(--text-color-white);
+    border-radius: 0.4rem;
+    width: 50%;
+    height: max-content;
+    text-align: center;
+    padding: 0.4rem 0rem;
+    margin: 0.1rem 0rem;
+    cursor: pointer;
+    background-color: var(--body-bg-color);
+}
+
+.ExitButton:hover{
+    background-color: var(--header-container);
+}
+
+/* Inner third container ends here */
+
+/* Home scramble words section starts here */
+.HomeScrambleWordsContent{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+    width: max-content;
+    padding: 0.4rem 0.4rem;
+    margin: 0.2rem 0.5rem;
+}
+
+.HomeScrambleContent{
+    padding: 0rem 0rem;
+}
+
+.HomeScrambleContent h3{
+    margin: 0;
+    padding: 0;
+    font-size: 1.6rem;
+    letter-spacing: 0.4rem;
+    text-transform: uppercase;
+}
+
+.HomeWordsContent{
+    position: relative;
+    width: max-content;
+    text-align: center;
+    padding: 0rem 0.4rem;
+    height: 4.6rem;
+    animation: HomeWordsContentslideDown 1.2s ease-in-out forwards;
+}
+
+@keyframes HomeWordsContentslideDown{
+    0%{
+        transform: translateY(-800px) scale(0.7);
+        -webkit-transform:translateY(-800px) scale(0.7);
+    }
+    80%{
+        transform: translateY(0px) scale(0.5);
+        -webkit-transform:translateY(0px) scale(0.5);
+    }
+    100%{
+        transform: translateY(0px) scale(1);
+        -webkit-transform:translateY(0px) scale(1);
+    }
+}
+
+.Homeword{
+    border: 1px solid var(--text-color-white);
+    border-radius: 0.2rem;
+    padding: 0.1rem 0.1rem;
+    height: 1.2rem;
+    width: 1.2rem;
+    font-size: 1.2rem;
+    background-color: rgb(66, 185, 50);
+    color: var(--header-container);
+}
+
+.HomeMainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid var(--text-color-white);
+    border-radius: 0.4rem;
+    width: 80%;
+    margin: 3.5rem auto;
+    padding: 0.4rem 0.4rem;
+    height: 80vh;
+    gap: 0.8rem;
+}
+
+#PlayButton{
+    width: 7rem;
+    height: 2rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    border: 1px solid black;
+    border-radius: 0.4rem;
+    background-color: var(--header-container);
+    color: var(--text-color-white);
+}
+
+#PlayButton:hover{
+    color: var(--correct-word-color);
+    background-color: var(--body-bg-color);
+    border: 1px solid var(--text-color-white);
+    padding-top: 0.2rem;
+}
+
+.PlayButton{
+    animation: PlayButtonSlideUp 1.2s ease-in-out forwards;
+}
+
+@keyframes PlayButtonSlideUp {
+    0%{
+        transform: translateY(800px) scale(0.7);
+        -webkit-transform: translateY(800px) scale(0.7);
+    } 
+    80%{
+        transform: translateY(0px) scale(0.5);
+        -webkit-transform: translateY(0px) scale(0.5);
+    }   
+    100%{
+        transform: translateY(0px) scale(1);
+        -webkit-transform: translateY(0px) scale(1);
+    }      
+}
+
+/* Home scramble words section ends here */
+
+/* Media queries starts here */
+@media (max-width: 768px){
+    .InnerContainer2{
+        height: 36vh;
+    }
+
+    .ScrambleContent h3{
+        font-size: 1.4rem;
+        letter-spacing: 0.3rem;
+    }
+
+    .ScrambleWordsContent{
+        margin: 0.2rem 0.2rem;
+    }
+
+    .word{
+        height: 1rem;
+        width: 1rem;
+        font-size: 1rem;
+    }
+
+    .ScoreCounter p{
+        font-size: 1rem;
+    }
+    
+    .fa-lightbulb{
+        background-color: var(--header-container);
+        font-size: 1.2rem;
+    }
+
+    .scrambleletter{
+        border-radius: 0.3rem;
+        height: 1.8rem;
+        width: 1.8rem;
+        font-size: 1.8rem;
+    }
+
+    .AlertMessage p{
+        font-size: 0.9rem;
+    }
+
+    .GuideLineword h4{
+        font-size: 0.9rem;
+    }
+
+    .WordInputContainer{
+        background-color: var(--header-container);
+    }
+
+    #WordInput{
+        height: 1.8rem;
+        font-size: 0.8rem;
+    }
+
+    .ButtonsContainer{
+        font-size: 0.7rem;
+    }
+    
+}
+
+@media (max-width: 530px){
+    .InnerContainer2{
+        height: 30vh;
+    }
+
+    .ScrambleContent h3{
+        font-size: 1.2rem;
+        letter-spacing: 0.2rem;
+    }
+
+    .ScrambleWordsContent{
+        margin: 0.2rem 0rem;
+        margin-left: -0.2rem;
+    }
+
+    .word{
+        height: 0.8rem;
+        width: 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .ScoreCounter p{
+        font-size: 0.9rem;
+    }
+    
+    .fa-lightbulb{
+        background-color: var(--header-container);
+        font-size: 1rem;
+    }
+
+    #LevelSelector{
+        font-size: 0.76rem;
+    }
+    
+    #LevelSelector option{
+        font-size: 0.76rem;
+    }
+
+    .scrambleletter{
+        border-radius: 0.2rem;
+        height: 1.2rem;
+        width: 1.2rem;
+        font-size: 1.2rem;
+    }
+
+    .AlertMessage p{
+        font-size: 0.8rem;
+    }
+
+    .GuideLineword h4{
+        font-size: 0.8rem;
+    }
+
+    .WordInputContainer{
+        background-color: var(--header-container);
+    }
+
+    #WordInput{
+        height: 1rem;
+        font-size: 0.8rem;
+    }
+
+    .ButtonsContainer{
+        font-size: 0.5rem;
+    }
+}
+
+/* Media queries ends here */
+
+
+
+    </style>
+</head>
+<body>
+    <!-- Home main container start here -->
+    <div class="HomeMainContainer">
+        <div class="HomeWordsContent">
+                <div class="HomeScrambleContent">
+                    <h3>Scramble</h3>
+                </div>
+                <div class="HomeScrambleWordsContent">
+                    <div class="Homeword word1">W</div>
+                    <div class="Homeword word2">O</div>
+                    <div class="Homeword word3">R</div>
+                    <div class="Homeword word4">D</div>
+                    <div class="Homeword word5">S</div>
+                </div>
+        </div>
+        <div class="PlayButton">
+            <button type="button" id="PlayButton">Play</button>
+        </div>
+    </div>
+    <!-- Home main container ends here -->
+
+    <!-- Container box starts here -->
+        <div class="Container">
+            <!-- Inner first container starts here -->
+            <div class="InnerContainer">
+                <div class="ScoreCounter">
+                    <p>Score : <span id="score">0</span></p>
+                </div>
+                <div class="WordsContent">
+                    <div class="ScrambleContent">
+                        <h3>Scramble</h3>
+                    </div>
+                    <div class="ScrambleWordsContent">
+                        <div class="word word1">W</div>
+                        <div class="word word2">O</div>
+                        <div class="word word3">R</div>
+                        <div class="word word4">D</div>
+                        <div class="word word5">S</div>
+                    </div>
+                </div>
+                <div class="HintButton">
+                    <i class="fa-regular fa-lightbulb"></i>
+                </div>
+                <!-- Level selector starts here -->
+                <div class="LevelSelector">
+                    <select name="Level" id="LevelSelector">
+                        <option value="easy" selected>Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                        <option value="veryHard">Very Hard</option>
+                    </select>
+                </div>
+                <!-- Level selector ends here -->
+            </div>
+            <!-- Inner first container ends here -->
+            <!-- Inner second container starts here -->
+                <div class="InnerContainer2">
+                    <div class="DiplayedWordsContent">
+                        
+                    </div>
+                    <div class="AlertMessage">
+                        <p class="animate__animated">Correct Guess</p>
+                    </div>
+                    <div class="GuideLineword">
+                        <h4>Guess the above displayed word !</h4>
+                    </div>
+                </div>
+            <!-- Inner second container ends here -->
+            <!-- Inner third container starts here -->
+                <div class="InnerContainer3">
+                    <div class="WordInputContainer">
+                        <input type="text" id="WordInput" placeholder="Enter the given word in correct order here...">
+                    </div>
+                    <div class="ButtonsContainer">
+                        <div class="EnterButton">
+                            <h2>Enter</h2>
+                        </div>
+                        <div class="NextButton">
+                            <h2>Next</h2>
+                        </div>
+                    </div>
+                    <div class="ButtonsContainer">
+                        <div class="ResetButton">
+                            <h2>Reset</h2>
+                        </div>
+                        <div class="ExitButton">
+                            <h2>Exit</h2>
+                        </div>
+                    </div>
+                </div>
+            <!-- Inner third container ends here -->
+            
+        </div>
+    <!-- Container box ends here -->
+
+    <script>
+        // Creating all variables
+const EnterButton = document.querySelector('.EnterButton');
+const NextButton = document.querySelector('.NextButton');
+const ResetScoreButton = document.querySelector('.ResetButton');
+const ExitButton = document.querySelector('.ExitButton');
+const DiplayedWordsContent = document.querySelector('.DiplayedWordsContent');
+const WordInput = document.querySelector('#WordInput');
+const ScoreCounter = document.querySelector('#score');
+const AlertMessageContainer = document.querySelector('.AlertMessage');
+const AlertMessage = document.querySelector('.AlertMessage p');
+const PlayButton = document.querySelector('#PlayButton');
+const Container = document.querySelector('.Container');
+const HomeMainContainer = document.querySelector('.HomeMainContainer');
+const LevelSelector = document.querySelector('#LevelSelector');
+const HintButton = document.querySelector('.fa-lightbulb');
+const GuideLineword = document.querySelector('.GuideLineword h4');
+
+let score = 0;
+// Array of words for each level
+const easyWords = [
+    'star', 'lamp', 'ring', 'boat', 'desk', 'cake', 'fish', 'tree', 'wind', 'road'
+];
+const mediumWords = [
+    'planet', 'garden', 'school', 'friend', 'window', 'bottle', 'forest', 'animal', 'market', 'bridge'
+];
+const hardWords = [
+    'vacation', 'elephant', 'computer', 'sunflower', 'rainbow', 'adventure', 'bicycle', 'hospital', 'telescope', 'mountain'
+];
+const veryHardWords = [
+    'encyclopedia', 'transportation', 'refrigerator', 'communication', 'entrepreneur', 'understanding', 'circumference', 'philosopher', 'mathematical', 'environment'
+];
+
+// Array of hints for each level
+const easyHints = [
+    'A celestial object that shines in the night sky.',
+    'A device that produces light.',
+    'A circular band worn on a finger.',
+    'A small vessel for traveling on water.',
+    'A piece of furniture with a flat top and legs.',
+    'A sweet baked dessert, often with frosting.',
+    'An aquatic animal with gills and fins.',
+    'A woody plant with leaves and branches.',
+    'Air in motion, usually felt as a breeze.',
+    'A paved path for vehicles to travel on.'
+];
+
+const mediumHints = [
+    'A celestial body orbiting a star.',
+    'An area with plants and flowers.',
+    'An institution for educating children.',
+    'A person whom one knows and with whom one has a bond.',
+    'An opening in a wall to let in light and air.',
+    'A container with a narrow neck used for storing liquids.',
+    'A dense collection of trees and plants.',
+    'A living organism that feeds on organic matter.',
+    'A place where goods are bought and sold.',
+    'A structure built to span a physical obstacle.'
+];
+
+const hardHints = [
+    'A period of time spent away from home or traveling.',
+    'A large mammal with a trunk and tusks.',
+    'An electronic device for processing data.',
+    'A plant with large yellow flowers that follows the sun.',
+    'A natural phenomenon forming a colorful arc in the sky.',
+    'An exciting or unusual experience.',
+    'A vehicle with two wheels powered by pedaling.',
+    'A medical institution for treating patients.',
+    'An optical instrument for viewing distant objects.',
+    'A large landform that rises above the surrounding land.'
+];
+
+const veryHardHints = [
+    'A comprehensive reference work with articles on various topics.',
+    'A system or means of conveying people or goods.',
+    'An appliance for keeping food and drinks cold.',
+    'The exchange of information through various means.',
+    'A person who starts and runs a business.',
+    'The ability to understand something.',
+    'The distance around a circular object.',
+    'A person engaged in the study of fundamental questions.',
+    'Relating to the science of numbers and their operations.',
+    'The surroundings or conditions in which a person lives.'
+];
+
+// Default level easy
+let words = easyWords;
+
+ // Function to scramble a word
+ function scrambleWord(word) {
+    if(word.length < 2) {
+        return word;
+    }
+
+    let scrambled;
+    do{
+        scrambled = word.split('');
+        for(let i = scrambled.length - 1; i > 0; i--){
+            const j = Math.floor(Math.random() * (i+1));
+            [scrambled[i], scrambled[j]] = [scrambled[j], scrambled[i]];
+        }
+        scrambled = scrambled.join('');
+    }while(scrambled === word);
+    
+    return scrambled;
+ }
+
+ // Converting words to uppercase
+ WordInput.addEventListener('input', ()=> {
+    WordInput.value = WordInput.value.toUpperCase();
+ })
+
+ // Function to display a scramble word
+ function displayScrambledWord(word){
+    DiplayedWordsContent.innerHTML = '';
+
+    // Creating div for each letter with specific styles
+    for(let i = 0; i < word.length; i++){
+        let letterDiv = document.createElement('div');
+        letterDiv.classList.add('scrambleletter', `scrambleletter${i + 1}`);
+        letterDiv.textContent = word[i];
+        DiplayedWordsContent.appendChild(letterDiv);
+    }
+ }
+
+ // To track the currentwordindex
+ let currentWordIndex = -1;
+
+ // Function to get a random from the array and scramble it
+ function getRandomScrambledWord(){
+    currentWordIndex = Math.floor(Math.random() * words.length);
+    const randomScrambledWord = words[currentWordIndex];
+    return scrambleWord(randomScrambledWord);
+ }
+
+ // Function to get hint for the current word
+ function getHint(){
+    const selectedLevel = LevelSelector.value;
+    let hint;
+    switch(selectedLevel){
+        case 'easy':
+            hint = easyHints[currentWordIndex];
+            break;
+        case 'medium':
+            hint = mediumHints[currentWordIndex];
+            break;
+        case 'hard':
+            hint = hardHints[currentWordIndex];
+            break;
+        case 'veryHard':
+            hint = veryHardHints[currentWordIndex];
+            break;
+    }
+
+    return hint;
+ }
+
+ // Adding to eventlistener to dispay hint for the current word
+ HintButton.addEventListener('click', ()=> {
+    const hint = getHint();
+    GuideLineword.innerHTML = `Hint : ${hint}`;
+    GuideLineword.style.textTransform = 'capitalise';
+ });
+
+ // Clear input field
+ function ClearInputField(){
+    WordInput.value = '';
+ }
+
+ // Function to check the input word is correct
+function checkWord(){
+    const inputWord = WordInput.value.trim().toLowerCase();
+    const correctWordIndex = words.findIndex(word => word.toLowerCase() === inputWord);
+    if(correctWordIndex !== -1 && inputWord === words[correctWordIndex]){
+        score++;
+        ScoreCounter.textContent = score;
+        AlertMessage.classList.remove('AlertIncorrect');
+        AlertMessage.classList.add('AlertCorrect');
+        AlertMessage.classList.remove('animate__flash');
+        AlertMessage.classList.add('animate__pulse');
+        AlertMessage.innerHTML = `<p>Correct Guess! <i class="fa-regular fa-face-laugh-beam"></i></p>`;
+        ClearInputField();
+    }else{
+        AlertMessage.classList.remove('AlertCorrect');
+        AlertMessage.classList.add('AlertIncorrect');
+        AlertMessage.classList.remove('animate__pulse');
+        AlertMessage.classList.add('animate__flash');
+        AlertMessage.innerHTML = `<p>Wrong Guess! Please Try Again <i class="fa-solid fa-face-sad-tear"></i></i></p>`;
+        ClearInputField();
+    }
+    // Display the alert message
+    AlertMessageContainer.style.display = 'block';
+    // Hide the alert message after 1.5 seconds
+    setTimeout(() => {
+        AlertMessageContainer.style.display = 'none';
+    }, 1500);
+}
+
+// Function to set words array based on selected level
+function setWordsLevel(){
+    const selectedLevel = LevelSelector.value;
+    switch(selectedLevel){
+        case 'easy':
+            words = easyWords;
+            break;
+        case 'hard':
+            words = hardWords;
+            break;
+        case 'medium':
+            words = mediumWords;
+            break;
+        case 'veryHard':
+            words = veryHardWords;
+            break;
+    }
+
+    // Display a new scrambledWord when selecting the level
+    const newScrambledWord = getRandomScrambledWord();
+    displayScrambledWord(newScrambledWord);
+}
+
+// Adding event listener to change words display when selecting the level
+LevelSelector.addEventListener('change', ()=> {
+    setWordsLevel();
+    GuideLineword.textContent = '';
+});
+
+ // Window onload to method to display word on screen loading
+ window.onload = function(){
+    const initialScrambledWord = getRandomScrambledWord()
+    displayScrambledWord(initialScrambledWord);
+ }
+
+EnterButton.addEventListener('click', () => {
+    if(WordInput.value === ''){
+        alert('Please enter the given word!');
+    }else{
+        checkWord();
+    }
+});
+
+// Next button to display next random scrambled word
+NextButton.addEventListener('click', () => {
+    const nextScrambledWord = getRandomScrambledWord();
+    displayScrambledWord(nextScrambledWord);
+    // Resetting alert message content
+    AlertMessage.textContent = '';
+    WordInput.value = '';
+    GuideLineword.textContent = '';
+});
+
+ResetScoreButton.addEventListener('click', () => {
+    score = 0;
+    ScoreCounter.textContent = score;
+    GuideLineword.textContent = '';
+});
+
+ExitButton.addEventListener('click', () => {
+    score = 0;
+    ScoreCounter.textContent = score;
+    Container.style.display = 'none';
+    HomeMainContainer.style.display = 'flex';
+});
+
+PlayButton.addEventListener('click', () => {
+    Container.style.display = 'block';
+    HomeMainContainer.style.display = 'none';
+})
+
+    </script>
+</body>
+</html>
